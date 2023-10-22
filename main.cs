@@ -1,14 +1,15 @@
 using System;
-//20231008_AndrewHorton_Exercise4.2
+//20231022_AndrewHorton_Exercise5.1
 class Program {
   public static void Main (string[] args) {
     char initialValue = 'a';
     int saleValue;
-    int dTotalSales = 0;
-    int eTotalSales = 0;
-    int fTotalSales = 0;
     int goodValue = 0;
-    int grandTotal = 0;
+    double grandTotal = 0;
+
+    string[] salesPersonNames = new string[3] { "Danielle", "Edward", "Francis"};
+    char[] allowedInitials = new char[6] {'D','d','E','e','F','f'};
+    double[] accumulatedSalesValues = new double[3] { 0, 0, 0};
         
     while ((initialValue != 'Z') && (initialValue != 'z'))
     {
@@ -18,31 +19,26 @@ class Program {
       if (char.TryParse(initialInput, out initialValue))
       {
           goodValue = 0; 
-          switch(initialValue)
+          if((initialValue == allowedInitials[0])||(initialValue == allowedInitials[1]))
+          {  
+              goodValue = 1; 
+          }
+          else if((initialValue == allowedInitials[2])||(initialValue == allowedInitials[3]))
           {
-            case 'D':
-            case 'd':
-              goodValue = 1; 
-              //Console.WriteLine("D");
-              break;
-            case 'E':
-            case 'e':
-              goodValue = 1; 
-              //Console.WriteLine("E");
-              break;
-            case 'F':
-            case 'f':
-              goodValue = 1; 
-              //Console.WriteLine("f");
-              break;
-            case 'z':
-            case 'Z':
-              //Console.WriteLine("z");
-              break;
-            default:
-              Console.WriteLine("Error, invalid salesperson selected, please try again");
-              break;
-          } 
+            goodValue = 1; 
+
+          }
+          else if((initialValue == allowedInitials[4])||(initialValue == allowedInitials[5]))
+          {
+            goodValue = 1; 
+          }
+          else if((initialValue == 'z')||(initialValue == 'Z')) 
+          {
+          }
+          else
+          {
+            Console.WriteLine("Error, invalid salesperson selected, please try again" );
+          }
       }
       else 
       {
@@ -59,52 +55,43 @@ class Program {
         else {
           Console.WriteLine("Error Please enter a number" );
         }
-  
-        switch(initialValue)
+
+        if((initialValue == allowedInitials[0])||(initialValue == allowedInitials[1]))
         {
-          case 'D':
-            dTotalSales = dTotalSales + saleValue;
-            break;
-          case 'd':
-            dTotalSales = dTotalSales + saleValue;
-            break;
-          case 'E':
-            eTotalSales = eTotalSales + saleValue;
-            break;
-          case 'e':
-            eTotalSales = eTotalSales + saleValue;
-            break;
-          case 'f':
-            fTotalSales = fTotalSales + saleValue;
-            break;
-          case 'F':
-            fTotalSales = fTotalSales + saleValue;
-            break;
+          accumulatedSalesValues[0] = accumulatedSalesValues[0] + saleValue;
+        }
+        if((initialValue == allowedInitials[2])||(initialValue == allowedInitials[3]))
+        {
+          accumulatedSalesValues[1] = accumulatedSalesValues[1] + saleValue;
+        }
+        if((initialValue == allowedInitials[4])||(initialValue == allowedInitials[5]))
+        {
+          accumulatedSalesValues[2] = accumulatedSalesValues[2] + saleValue;
         }
       }  
     }
-    grandTotal = dTotalSales + eTotalSales + fTotalSales;
-    if(dTotalSales > eTotalSales && dTotalSales > fTotalSales)
+    grandTotal = accumulatedSalesValues[0] + accumulatedSalesValues[1] + accumulatedSalesValues[2];
+    if(accumulatedSalesValues[0] > accumulatedSalesValues[1] && accumulatedSalesValues[0] > accumulatedSalesValues[2])
     {  
-      Console.WriteLine("salesperson D: {0}", dTotalSales);
-      Console.WriteLine("salesperson E: {0}", eTotalSales);
-      Console.WriteLine("salesperson F: {0}", fTotalSales);
+      Console.WriteLine("{0}: {1}", salesPersonNames[0], accumulatedSalesValues[0]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[1], accumulatedSalesValues[1]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[2], accumulatedSalesValues[2]);
       Console.WriteLine("Grand Total: {0}", grandTotal);
       Console.WriteLine("Highest Sale: D");
     }
-    if(eTotalSales > dTotalSales && eTotalSales > fTotalSales)
+    if(accumulatedSalesValues[1] > accumulatedSalesValues[0] && accumulatedSalesValues[1] > accumulatedSalesValues[2])
     {
-      Console.WriteLine("salesperson D: {0}", dTotalSales);
-      Console.WriteLine("salesperson E: {0}", eTotalSales);
-      Console.WriteLine("salesperson F: {0}", fTotalSales);
+      Console.WriteLine("{0}: {1}", salesPersonNames[0], accumulatedSalesValues[0]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[1], accumulatedSalesValues[1]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[2], accumulatedSalesValues[2]);
       Console.WriteLine("Grand Total: {0}", grandTotal);
       Console.WriteLine("Highest Sale: E");
     }
-    if(fTotalSales > eTotalSales && fTotalSales > dTotalSales)
+    if(accumulatedSalesValues[2] > accumulatedSalesValues[1] && accumulatedSalesValues[2] > accumulatedSalesValues[0])
     {
-      Console.WriteLine("salesperson D: {0}", dTotalSales);
-      Console.WriteLine("salesperson E: {0}", eTotalSales);
-      Console.WriteLine("salesperson F: {0}", fTotalSales);
+      Console.WriteLine("{0}: {1}", salesPersonNames[0], accumulatedSalesValues[0]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[1], accumulatedSalesValues[1]);
+      Console.WriteLine("{0}: {1}", salesPersonNames[2], accumulatedSalesValues[2]);
       Console.WriteLine("Grand Total: {0}", grandTotal);
       Console.WriteLine("Highest Sale: F");
     }
